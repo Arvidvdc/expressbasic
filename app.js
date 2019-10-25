@@ -8,18 +8,23 @@ app.get("/",function(req,res){
 
 app.get("/speak/:animal",function(req,res){
     var animal = req.params.animal.toLowerCase();
-    var geluid
+    var geluid="";
 
-    if(animal=="pig"){
-        geluid="Oink";
-    } else if (animal=="cow"){
-        geluid="Moo";
-    } else if (animal=="dog"){
-        geluid="Woof Woof";
-    } else {
-        res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
-    };
-    res.send("The " + animal + " says " + geluid  +bronvermelding);
+    switch (animal) {
+        case "pig":
+            geluid="Oink";
+            break;
+        case "cow":
+            geluid="Moo";
+            break;
+        case "dog":
+            geluid="Woof Woof";
+            break;
+        default:
+                res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
+            break;
+    }
+    if(geluid.length!=0){res.send("The " + animal + " says " + geluid  +bronvermelding)};
 });
 
 app.get("/repeat/:repeater/:count",(request,response) => {
@@ -39,7 +44,6 @@ app.get("*",function(req,res){
     res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
 });
 
-
 function repeatFunction(str,num){
     var result="";
     for(i=0;i<num;i++){
@@ -51,5 +55,5 @@ function repeatFunction(str,num){
 
 app.listen(3000, () => console.log("Express Applicatie gestart op poort 3000"));
 
-
+//
 // Based on course "The Web Developer Bootcamp | Udemy" from Colt Steele
