@@ -1,12 +1,12 @@
-var express=require("express");
-var app=express();
-var bronvermelding = '<p style="text-align: center; margin: 25px; padding: 0;"> <span style="border: solid 1px; margin: 0; padding: 0 5px;">Based on course "The Web Developer Bootcamp | Udemy" from Colt Steele</span></p>'
+var express=require("express"),
+    app=express(),
+    bronvermelding = '<p style="text-align: center; margin: 25px; padding: 0;"> <span style="border: solid 1px; margin: 0; padding: 0 5px;">Based on course "The Web Developer Bootcamp | Udemy" from Colt Steele</span></p>'
 
-app.get("/",function(req,res){
+app.get("/",(req,res) => {
     res.send("Hi there, welcome to my assignment!" +bronvermelding);
 });
 
-app.get("/speak/:animal",function(req,res){
+app.get("/speak/:animal",(req,res) => {
     var animal = req.params.animal.toLowerCase();
     var geluid="";
 
@@ -27,27 +27,26 @@ app.get("/speak/:animal",function(req,res){
     if(geluid.length!=0){res.send("The " + animal + " says " + geluid  +bronvermelding)};
 });
 
-app.get("/repeat/:repeater/:count",(request,response) => {
-    var repeat=request.params.repeater.toLowerCase();
-    var desire = repeatFunction(request.params.repeater.toLowerCase(),request.params.count);
+app.get("/repeat/:repeater/:count",(req,res) => {
+    var repeat=req.params.repeater.toLowerCase();
+    var desire = repeatFunction(req.params.repeater.toLowerCase(),req.params.count);
     
     if(repeat=="hello"){
-        response.send(desire  +bronvermelding);
+        res.send(desire  +bronvermelding);
     } else if(repeat=="blah"){
-        response.send(desire  +bronvermelding);
+        res.send(desire  +bronvermelding);
     } else {
-        response.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
+        res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
     };
 });
 
-app.get("*",function(req,res){
+app.get("*",(req,res) => {
     res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
 });
 
 function repeatFunction(str,num){
     var result="";
     for(i=0;i<num;i++){
-        // console.log(str)
         result+= str +" ";
     };
     return result;
