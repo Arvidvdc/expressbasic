@@ -7,24 +7,25 @@ app.get("/",(req,res) => {
 });
 
 app.get("/speak/:animal",(req,res) => {
-    var animal = req.params.animal.toLowerCase();
-    var geluid="";
+    var collectionDieren = {
+        pig:'Oink',
+        cow: 'Moo',
+        dog: 'Woof Woof',
+        cat: 'Meow',
+        antelope: 'Snort',
+        bee: 'Buzz',
+        wolf: 'Howl',
+        alligator: 'Bellow',
+        };
 
-    switch (animal) {
-        case "pig":
-            geluid="Oink";
-            break;
-        case "cow":
-            geluid="Moo";
-            break;
-        case "dog":
-            geluid="Woof Woof";
-            break;
-        default:
-                res.send("Sorry, page not found... What are you doing with your life?"  +bronvermelding);
-            break;
-    }
-    if(geluid.length!=0){res.send("The " + animal + " says " + geluid  +bronvermelding)};
+        var key = req.params.animal.toLowerCase();
+        
+        if(collectionDieren[key] === undefined) {
+            res.send("I don't know what " + key + " says");
+        } else {
+            res.send("The " + key + " says " + collectionDieren[key]);
+        }
+        // Thanks Bennie (y)
 });
 
 app.get("/repeat/:repeater/:count",(req,res) => {
